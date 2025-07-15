@@ -3,6 +3,7 @@ package handler
 import (
 	"net/http"
 
+	"github.com/kriti-mauludin/learn-golang/internal/http/middleware"
 	"github.com/kriti-mauludin/learn-golang/internal/parser"
 	"github.com/kriti-mauludin/learn-golang/internal/presenter/json"
 	todo_list_category_usecase "github.com/kriti-mauludin/learn-golang/internal/usecase/todo_list_category"
@@ -26,10 +27,10 @@ func NewTodoListCategoryHandler(
 }
 
 func (w *TodoListCategoryHandler) Register(app fiber.Router) {
-	app.Get("/todo-list-category/:id", w.GetByID)
-	app.Post("/todo-list-category", w.Create)
-	app.Put("/todo-list-category/:id", w.Update)
-	app.Delete("/todo-list-category/:id", w.Delete)
+	app.Get("/todo-list-category/:id", middleware.VerifyJWTToken, w.GetByID)
+	app.Post("/todo-list-category", middleware.VerifyJWTToken, w.Create)
+	app.Put("/todo-list-category/:id", middleware.VerifyJWTToken, w.Update)
+	app.Delete("/todo-list-category/:id", middleware.VerifyJWTToken, w.Delete)
 }
 
 // @Summary         Get Todo List by ID
@@ -77,6 +78,12 @@ func (w *TodoListCategoryHandler) Create(c *fiber.Ctx) error {
 	if err != nil {
 		return w.presenter.BuildError(c, err)
 	}
+
+	userID, err := w.parser.ParserUserID(c)
+	if err != nil {
+		return w.presenter.BuildError(c, err)
+	}
+	req.UserID = userID
 
 	err = w.todoListCategoryUsecase.Create(c.Context(), req)
 	if err != nil {

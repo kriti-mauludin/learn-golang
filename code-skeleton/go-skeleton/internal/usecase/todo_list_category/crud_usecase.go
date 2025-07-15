@@ -49,8 +49,10 @@ func (u *CrudTodoListCategoryUsecase) Create(ctx context.Context, req entity.Tod
 		Name:        req.Name,
 		Description: req.Description,
 		CreatedAt:   time.Now(),
+		CreatedBy:   req.UserID,
 	}
 
+	helper.Dump(data)
 	err := u.TodoListCategoryRepo.Create(ctx, nil, data, false)
 	if err != nil {
 		helper.LogError("TodoListCategoryRepo.Create", funcName, err, logFields, "")
