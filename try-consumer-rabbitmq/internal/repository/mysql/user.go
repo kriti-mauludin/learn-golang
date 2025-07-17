@@ -3,11 +3,11 @@ package mysql
 import (
 	"context"
 
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/config"
+	apperr "github.com/kriti-mauludin/try-consumer-rabbitmq/error"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/helper"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/repository/mysql/entity"
 	errwrap "github.com/pkg/errors"
-	"github.com/rahmatrdn/go-skeleton/config"
-	apperr "github.com/rahmatrdn/go-skeleton/error"
-	"github.com/rahmatrdn/go-skeleton/internal/helper"
-	"github.com/rahmatrdn/go-skeleton/internal/repository/mysql/entity"
 	"gorm.io/gorm"
 
 	"gorm.io/gorm/clause"

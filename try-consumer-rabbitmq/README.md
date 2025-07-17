@@ -2,7 +2,7 @@
 # Propper Skeleton for your Golang Project
 
 ## Description
-`go-skeleton` is a boilerplate for Golang projects. The project structure follows the Clean Code Architecture ([Read here](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)). This Skeleton made with **Fiber Framework**.  
+`try-consumer-rabbitmq` is a boilerplate for Golang projects. The project structure follows the Clean Code Architecture ([Read here](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)). This Skeleton made with **Fiber Framework**.  
 
 "Forget about the complexities of folder structures in Go, focus on your project!"
 
@@ -32,7 +32,7 @@ Feel free to contribute to this repository if you'd like!
 ## Contact
 | Name                   | Email                        | Role    |
 | ---------------------- | ---------------------------- | ------- |
-| Rahmat Ramadhan Putra  | rahmatrdn.dev@gmail.com     | Creator |
+| Rahmat Ramadhan Putra  | kriti-mauludin.dev@gmail.com     | Creator |
 
 
 
@@ -54,7 +54,7 @@ Feel free to contribute to this repository if you'd like!
 ### Installation
 1. Clone this repo
 ```sh
-git clone https://github.com/rahmatrdn/go-skeleton.git
+git clone https://github.com/kriti-mauludin/try-consumer-rabbitmq.git
 ```
 2. Copy `example.env` to `.env`
 ```sh
@@ -110,11 +110,11 @@ make test
 ### Running In Docker
 - Docker Build for API
 ```sh
-docker build -t go-skeleton-api:1.0.1 -f ./deploy/docker/api/Dockerfile .
+docker build -t try-consumer-rabbitmq-api:1.0.1 -f ./deploy/docker/api/Dockerfile .
 ```
 - Docker Build for Worker
 ```sh
-docker build -t go-skeleton-worker:1.0.1 -f ./deploy/docker/worker/Dockerfile .
+docker build -t try-consumer-rabbitmq-worker:1.0.1 -f ./deploy/docker/worker/Dockerfile .
 ```
 - Run docker compose for API and Workers
 ```sh

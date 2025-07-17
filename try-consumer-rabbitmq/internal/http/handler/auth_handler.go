@@ -3,12 +3,12 @@ package handler
 import (
 	"net/http"
 
-	"github.com/rahmatrdn/go-skeleton/entity"
-	"github.com/rahmatrdn/go-skeleton/internal/http/auth"
-	"github.com/rahmatrdn/go-skeleton/internal/http/middleware"
-	"github.com/rahmatrdn/go-skeleton/internal/parser"
-	"github.com/rahmatrdn/go-skeleton/internal/presenter/json"
-	"github.com/rahmatrdn/go-skeleton/internal/usecase"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/entity"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/http/auth"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/http/middleware"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/parser"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/presenter/json"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/usecase"
 
 	fiber "github.com/gofiber/fiber/v2"
 )

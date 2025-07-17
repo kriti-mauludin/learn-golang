@@ -5,23 +5,26 @@ import (
 	"fmt"
 	"time"
 
+	generalEntity "github.com/kriti-mauludin/try-consumer-rabbitmq/entity"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/helper"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/queue"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/repository/mysql"
+	mentity "github.com/kriti-mauludin/try-consumer-rabbitmq/internal/repository/mysql/entity"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/usecase"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/usecase/todo_list/entity"
 	errwrap "github.com/pkg/errors"
-	generalEntity "github.com/rahmatrdn/go-skeleton/entity"
-	"github.com/rahmatrdn/go-skeleton/internal/helper"
-	"github.com/rahmatrdn/go-skeleton/internal/repository/mysql"
-	mentity "github.com/rahmatrdn/go-skeleton/internal/repository/mysql/entity"
-	"github.com/rahmatrdn/go-skeleton/internal/usecase"
-	"github.com/rahmatrdn/go-skeleton/internal/usecase/todo_list/entity"
 )
 
 type CrudTodoListUsecase struct {
 	todoListRepo mysql.ITodoListRepository
+	queue        queue.Queue
 }
 
 func NewCrudTodoListUsecase(
 	todoListRepo mysql.ITodoListRepository,
+	queue queue.Queue,
 ) *CrudTodoListUsecase {
-	return &CrudTodoListUsecase{todoListRepo}
+	return &CrudTodoListUsecase{todoListRepo, queue}
 }
 
 type ICrudTodoListUsecase interface {
@@ -110,6 +113,21 @@ func (t *CrudTodoListUsecase) Create(ctx context.Context, todoListReq entity.Tod
 	if err != nil {
 		helper.LogError("todoListRepo.Create", funcName, err, captureFieldError, "")
 
+		return nil, err
+	}
+
+	sendEmailReq := entity.SendEmailReq{
+		UserID:    todoListReq.UserID,
+		CreatedAt: todoListPayload.CreatedAt,
+	}
+
+	sendEmailReqJson, _ := helper.Serialize(sendEmailReq)
+	err = t.queue.Publish(queue.ProcessSendEmail, sendEmailReqJson, 1)
+	if err != nil {
+		helper.LogError("queue.PublishMessage", funcName, err, generalEntity.CaptureFields{
+			"topic":   queue.ProcessSendEmail,
+			"payload": helper.ToString(sendEmailReq),
+		}, "")
 		return nil, err
 	}
 

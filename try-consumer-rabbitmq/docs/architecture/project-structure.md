@@ -1,6 +1,6 @@
-# File Tree for: go-skeleton
+# File Tree for: try-consumer-rabbitmq
 Generated on: 7/1/2025, 9:18:22 AM
-Path: go-skeleton
+Path: try-consumer-rabbitmq
 
 ```
 ├── api-client/

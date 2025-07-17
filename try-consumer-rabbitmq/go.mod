@@ -1,4 +1,4 @@
-module github.com/rahmatrdn/go-skeleton
+module github.com/kriti-mauludin/try-consumer-rabbitmq
 
 go 1.24.1
 

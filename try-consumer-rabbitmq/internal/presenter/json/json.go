@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/rahmatrdn/go-skeleton/entity"
-	apperr "github.com/rahmatrdn/go-skeleton/error"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/entity"
+	apperr "github.com/kriti-mauludin/try-consumer-rabbitmq/error"
 
 	"github.com/gofiber/fiber/v2"
 )

@@ -5,7 +5,7 @@ package mocks
 import (
 	context "context"
 
-	entity "github.com/rahmatrdn/go-skeleton/internal/usecase/todo_list/entity"
+	entity "github.com/kriti-mauludin/try-consumer-rabbitmq/internal/usecase/todo_list/entity"
 	mock "github.com/stretchr/testify/mock"
 )
 

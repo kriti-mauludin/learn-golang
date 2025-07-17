@@ -4,7 +4,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/rahmatrdn/go-skeleton/internal/repository/mysql/entity"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/repository/mysql/entity"
 
 	"github.com/google/uuid"
 )

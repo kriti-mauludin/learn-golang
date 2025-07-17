@@ -13,16 +13,16 @@ import (
 
 	"github.com/gofiber/fiber/v2/middleware/monitor"
 	"github.com/gofiber/swagger"
-	"github.com/rahmatrdn/go-skeleton/config"
-	_ "github.com/rahmatrdn/go-skeleton/docs"
-	"github.com/rahmatrdn/go-skeleton/entity"
-	"github.com/rahmatrdn/go-skeleton/internal/http/auth"
-	"github.com/rahmatrdn/go-skeleton/internal/http/handler"
-	"github.com/rahmatrdn/go-skeleton/internal/parser"
-	"github.com/rahmatrdn/go-skeleton/internal/presenter/json"
-	"github.com/rahmatrdn/go-skeleton/internal/repository/mysql"
-	"github.com/rahmatrdn/go-skeleton/internal/usecase"
-	todo_list_usecase "github.com/rahmatrdn/go-skeleton/internal/usecase/todo_list"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/config"
+	_ "github.com/kriti-mauludin/try-consumer-rabbitmq/docs"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/entity"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/http/auth"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/http/handler"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/parser"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/presenter/json"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/repository/mysql"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/usecase"
+	todo_list_usecase "github.com/kriti-mauludin/try-consumer-rabbitmq/internal/usecase/todo_list"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
@@ -64,10 +64,10 @@ func main() {
 	parser := parser.NewParser()
 
 	// RabbitMQ Configuration (if needed)
-	// queue, err := config.NewRabbitMQInstance(context.Background(), &cfg.RabbitMQOption)
-	// if err != nil {zp
-	// 	log.Fatal(err)
-	// }
+	queue, err := config.NewRabbitMQInstance(context.Background(), &cfg.RabbitMQOption)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	// Redis Configuration (if needed)
 	// redisDB := config.NewRedis(&cfg.RedisOption)
@@ -96,7 +96,7 @@ func main() {
 	// USECASE : Write bussines logic code here (validation, business logic, etc.)
 	// _ = usecase.NewLogUsecase(queue)  // LogUsecase is a sample usecase for sending log to queue (Mongodb, ElasticSearch, etc.)
 	userUsecase := usecase.NewUserUsecase(userRepo, jwtAuth)
-	crudTodoListUsecase := todo_list_usecase.NewCrudTodoListUsecase(todoListRepo)
+	crudTodoListUsecase := todo_list_usecase.NewCrudTodoListUsecase(todoListRepo, queue)
 
 	api := app.Group("/api/v1")
 

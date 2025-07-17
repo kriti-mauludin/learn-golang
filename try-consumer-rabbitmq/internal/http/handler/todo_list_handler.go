@@ -3,11 +3,11 @@ package handler
 import (
 	"net/http"
 
-	"github.com/rahmatrdn/go-skeleton/internal/http/middleware"
-	"github.com/rahmatrdn/go-skeleton/internal/parser"
-	"github.com/rahmatrdn/go-skeleton/internal/presenter/json"
-	todo_list_usecase "github.com/rahmatrdn/go-skeleton/internal/usecase/todo_list"
-	"github.com/rahmatrdn/go-skeleton/internal/usecase/todo_list/entity"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/http/middleware"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/parser"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/presenter/json"
+	todo_list_usecase "github.com/kriti-mauludin/try-consumer-rabbitmq/internal/usecase/todo_list"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/usecase/todo_list/entity"
 
 	fiber "github.com/gofiber/fiber/v2"
 )

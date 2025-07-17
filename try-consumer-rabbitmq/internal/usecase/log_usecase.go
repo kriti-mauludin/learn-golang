@@ -4,9 +4,9 @@ import (
 	"errors"
 	"os"
 
-	"github.com/rahmatrdn/go-skeleton/entity"
-	"github.com/rahmatrdn/go-skeleton/internal/helper"
-	"github.com/rahmatrdn/go-skeleton/internal/queue"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/entity"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/helper"
+	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/queue"
 	"go.uber.org/zap"
 )
 
