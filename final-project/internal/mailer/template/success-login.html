@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Worker Mailer</title>
+    
+    <style>
+        body, #bodyTable, #bodyCell {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        
+        p {
+            margin: 10px 0;
+            padding: 0;
+        }
+        
+        table {
+            border-collapse: collapse;
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            margin: 0;
+            padding: 0;
+        }
+        
+        img {
+            border: 0;
+            height: auto;
+            outline: none;
+            text-decoration: none;
+        }
+        
+        .mcnPreviewText {
+            display: none !important;
+        }
+        
+        .templateContainer {
+            max-width: 600px !important;
+        }
+        
+        a.mcnButton {
+            display: block;
+        }
+        
+        .mcnImage, .mcnRetinaImage {
+            vertical-align: bottom;
+        }
+        
+        .mcnTextContent {
+            word-break: break-word;
+        }
+        
+        .mcnTextContent img {
+            height: auto !important;
+        }
+
+        /* Header */
+        #templateHeader {
+            background-color: #f8f8f8;
+            padding: 0;
+        }
+        
+        .headerContainer .mcnTextContent, .headerContainer .mcnTextContent p {
+            color: #757575;
+            font-family: Helvetica, serif;
+            font-size: 16px;
+            line-height: 150%;
+            text-align: left;
+        }
+        
+        /* Body */
+        #templateBody {
+            background-color: #f8f8f8;
+            padding: 25px;
+        }
+        
+        .bodyContainer .mcnTextContent, .bodyContainer .mcnTextContent p {
+            color: #000000;
+            font-family: Helvetica, serif;
+            font-size: 16px;
+            line-height: 150%;
+            text-align: left;
+        }
+        
+        /* Footer */
+        #templateFooter {
+            background-color: #f8f8f8;
+            padding: 0;
+        }
+        
+        .footerContainer .mcnTextContent, .footerContainer .mcnTextContent p {
+            color: #FFFFFF;
+            font-family: Helvetica, serif;
+            font-size: 12px;
+            line-height: 150%;
+            text-align: center;
+        }
+        
+        @media only screen and (max-width: 480px) {
+            body {
+                width: 100% !important;
+                min-width: 100% !important;
+            }
+            .mcnRetinaImage {
+                max-width: 100% !important;
+            }
+            .mcnImage {
+                width: 100% !important;
+            }
+        }
+    </style>
+</head>
+  <body>
+	  <!-- container for centering the child -->
+	  <div id="bodyTable" class="centered-div-container">
+		  
+		  <!-- Center the child -->
+		  <div style="background-image: url(https://partner.cring.id/vector/vector-2.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center; position: absolute;
+      width: 950px;
+      height: 100%;
+      padding: 50px">
+		  <div style="position: absolute;margin:0 auto;
+      background-color:white;width: 850px;padding:50px;min-height: 550px;border-radius: 15px;box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);">
+			  <!-- whitespace separator -->
+			  <div style="min-width: 100%; padding-bottom: 20px;">
+			  </div>
+			  <div class="bodyContainer mcnTextContent" style="color:#000000; font-family:Helvetica,serif; font-size:16px; line-height:150%; text-align:left; ">
+				<p class="mcnTextContent">
+					Pemberitahuan bahwa Anda berhasil teregistrasi di APP kami dengan rincian sebagai berikut:
+				</p>
+				<p class="mcnTextContent" style="margin-top: 40px;">
+                    Name : {{.Name}}
+				</p>
+				<p class="mcnTextContent" style="margin-top: 5px;">
+                    Email : {{.Email}}
+				</p>
+				<p class="mcnTextContent" style="margin-top: 5px;">
+                    Role : {{.Role}}
+				</p>
+                <p class="mcnTextContent" style="margin-top: 5px;">
+                    Date / Time : {{.Datetime}}
+                </p>
+				<p class="mcnTextContent" style="margin-top: 20px;color: #959595;">
+                    Jika Anda tidak pernah mendaftar ke APP kami, mohon abaikan email ini. Kemungkinan ada orang yang salah mengetik alamat email mereka.<br>
+                    Harap diingat, email ini dihasilkan secara otomatis oleh sistem kami, jadi mohon tidak membalas langsung ke email ini.<br>
+                    Terima kasih telah memilih APP kami! Kami bersemangat untuk membantu Anda mengembangkan bisnis Anda.
+                </p>
+			  </div>
+		  </div>
+      </div>
+	  </div>
+  </body>
+</html>
+
+

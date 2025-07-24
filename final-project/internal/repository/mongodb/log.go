@@ -3,8 +3,8 @@ package mongodb
 import (
 	"context"
 
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/helper"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/repository/mongodb/entity"
+	"github.com/kriti-mauludin/final-project/internal/helper"
+	"github.com/kriti-mauludin/final-project/internal/repository/mongodb/entity"
 	errwrap "github.com/pkg/errors"
 	"go.mongodb.org/mongo-driver/mongo"
 )

@@ -3,11 +3,11 @@ package mysql
 import (
 	"context"
 
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/config"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/helper"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/repository/mysql/entity"
+	"github.com/kriti-mauludin/final-project/config"
+	"github.com/kriti-mauludin/final-project/internal/helper"
+	"github.com/kriti-mauludin/final-project/internal/repository/mysql/entity"
 
-	apperr "github.com/kriti-mauludin/try-consumer-rabbitmq/error"
+	apperr "github.com/kriti-mauludin/final-project/error"
 
 	errwrap "github.com/pkg/errors"
 	"gorm.io/gorm"

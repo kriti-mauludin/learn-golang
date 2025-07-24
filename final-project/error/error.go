@@ -3,7 +3,7 @@ package error
 import (
 	"net/http"
 
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/entity"
+	"github.com/kriti-mauludin/final-project/entity"
 )
 
 func ErrRecordNotFound() CustomErrorResponse {

@@ -3,9 +3,9 @@ package consumer
 import (
 	"context"
 
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/entity"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/helper"
-	mongoRepo "github.com/kriti-mauludin/try-consumer-rabbitmq/internal/repository/mongodb"
+	"github.com/kriti-mauludin/final-project/entity"
+	"github.com/kriti-mauludin/final-project/internal/helper"
+	mongoRepo "github.com/kriti-mauludin/final-project/internal/repository/mongodb"
 )
 
 type ExampleQueue struct {

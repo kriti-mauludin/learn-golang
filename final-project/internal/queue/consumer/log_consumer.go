@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/entity"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/helper"
-	mongoRepo "github.com/kriti-mauludin/try-consumer-rabbitmq/internal/repository/mongodb"
-	moentity "github.com/kriti-mauludin/try-consumer-rabbitmq/internal/repository/mongodb/entity"
+	"github.com/kriti-mauludin/final-project/entity"
+	"github.com/kriti-mauludin/final-project/internal/helper"
+	mongoRepo "github.com/kriti-mauludin/final-project/internal/repository/mongodb"
+	moentity "github.com/kriti-mauludin/final-project/internal/repository/mongodb/entity"
 )
 
 type LogQueue struct {

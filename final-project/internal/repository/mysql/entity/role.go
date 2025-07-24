@@ -3,7 +3,7 @@ package entity
 import "time"
 
 type Role struct {
-	Role        string    `gorm:"column:role"`
+	Name        string    `gorm:"column:name"`
 	UserID      int64     `gorm:"column:user_id"`
 	Description string    `gorm:"column:description"`
 	DoingAt     time.Time `gorm:"column:doing_at"`

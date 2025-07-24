@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/entity"
+	"github.com/kriti-mauludin/final-project/entity"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )

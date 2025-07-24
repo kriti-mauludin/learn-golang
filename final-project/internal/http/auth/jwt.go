@@ -7,9 +7,9 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v4"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/config"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/entity"
-	mentity "github.com/kriti-mauludin/try-consumer-rabbitmq/internal/repository/mysql/entity"
+	"github.com/kriti-mauludin/final-project/config"
+	"github.com/kriti-mauludin/final-project/entity"
+	mentity "github.com/kriti-mauludin/final-project/internal/repository/mysql/entity"
 )
 
 const (

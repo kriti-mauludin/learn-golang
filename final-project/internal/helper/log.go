@@ -5,8 +5,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/config"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/entity"
+	"github.com/kriti-mauludin/final-project/config"
+	"github.com/kriti-mauludin/final-project/entity"
 	"go.uber.org/zap"
 )
 

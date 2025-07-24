@@ -4,9 +4,9 @@ import (
 	"errors"
 	"os"
 
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/entity"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/helper"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/queue"
+	"github.com/kriti-mauludin/final-project/entity"
+	"github.com/kriti-mauludin/final-project/internal/helper"
+	"github.com/kriti-mauludin/final-project/internal/queue"
 	"go.uber.org/zap"
 )
 

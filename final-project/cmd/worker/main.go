@@ -7,9 +7,9 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/config"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/queue"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/queue/consumer"
+	"github.com/kriti-mauludin/final-project/config"
+	"github.com/kriti-mauludin/final-project/internal/queue"
+	"github.com/kriti-mauludin/final-project/internal/queue/consumer"
 	"github.com/subosito/gotenv"
 )
 

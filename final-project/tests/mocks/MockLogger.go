@@ -1,6 +1,6 @@
 package mocks
 
-import entity "github.com/kriti-mauludin/try-consumer-rabbitmq/entity"
+import entity "github.com/kriti-mauludin/final-project/entity"
 
 type MockLogger struct {
 	LogErrorFunc func(processName string, funcName string, err error, logFields entity.CaptureFields, message string)

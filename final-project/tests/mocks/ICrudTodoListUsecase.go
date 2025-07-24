@@ -5,7 +5,7 @@ package mocks
 import (
 	context "context"
 
-	entity "github.com/kriti-mauludin/try-consumer-rabbitmq/internal/usecase/todo_list/entity"
+	entity "github.com/kriti-mauludin/final-project/internal/usecase/todo_list/entity"
 	mock "github.com/stretchr/testify/mock"
 )
 

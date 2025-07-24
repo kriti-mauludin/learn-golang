@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	fiber "github.com/gofiber/fiber/v2"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/http/handler"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/tests/mocks"
+	"github.com/kriti-mauludin/final-project/internal/http/handler"
+	"github.com/kriti-mauludin/final-project/tests/mocks"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/suite"
 	"github.com/valyala/fasthttp"

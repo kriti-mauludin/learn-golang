@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/entity"
-	apperr "github.com/kriti-mauludin/try-consumer-rabbitmq/error"
+	"github.com/kriti-mauludin/final-project/entity"
+	apperr "github.com/kriti-mauludin/final-project/error"
 
 	"github.com/gofiber/fiber/v2"
 )

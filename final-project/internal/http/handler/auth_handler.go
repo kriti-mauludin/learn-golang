@@ -3,12 +3,12 @@ package handler
 import (
 	"net/http"
 
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/entity"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/http/auth"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/http/middleware"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/parser"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/presenter/json"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/usecase"
+	"github.com/kriti-mauludin/final-project/entity"
+	"github.com/kriti-mauludin/final-project/internal/http/auth"
+	"github.com/kriti-mauludin/final-project/internal/http/middleware"
+	"github.com/kriti-mauludin/final-project/internal/parser"
+	"github.com/kriti-mauludin/final-project/internal/presenter/json"
+	"github.com/kriti-mauludin/final-project/internal/usecase"
 
 	fiber "github.com/gofiber/fiber/v2"
 )

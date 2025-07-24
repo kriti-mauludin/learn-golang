@@ -6,11 +6,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/config"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/tests/mocks"
+	"github.com/kriti-mauludin/final-project/config"
+	"github.com/kriti-mauludin/final-project/tests/mocks"
 
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/repository/mysql"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/repository/mysql/entity"
+	"github.com/kriti-mauludin/final-project/internal/repository/mysql"
+	"github.com/kriti-mauludin/final-project/internal/repository/mysql/entity"
 
 	"github.com/DATA-DOG/go-sqlmock"
 	"github.com/bxcodec/faker"

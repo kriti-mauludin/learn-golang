@@ -3,7 +3,7 @@ package config
 import (
 	"context"
 
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/queue"
+	"github.com/kriti-mauludin/final-project/internal/queue"
 )
 
 func NewRabbitMQInstance(ctx context.Context, cfg *RabbitMQOption) (*queue.RabbitMQ, error) {

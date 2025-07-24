@@ -2,8 +2,8 @@ package middleware
 
 import (
 	"github.com/gofiber/fiber/v2"
-	apperr "github.com/kriti-mauludin/try-consumer-rabbitmq/error"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/http/auth"
+	apperr "github.com/kriti-mauludin/final-project/error"
+	"github.com/kriti-mauludin/final-project/internal/http/auth"
 )
 
 func VerifyJWTToken(c *fiber.Ctx) error {

@@ -13,16 +13,17 @@ import (
 
 	"github.com/gofiber/fiber/v2/middleware/monitor"
 	"github.com/gofiber/swagger"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/config"
-	_ "github.com/kriti-mauludin/try-consumer-rabbitmq/docs"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/entity"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/http/auth"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/http/handler"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/parser"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/presenter/json"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/repository/mysql"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/usecase"
-	todo_list_usecase "github.com/kriti-mauludin/try-consumer-rabbitmq/internal/usecase/todo_list"
+	"github.com/kriti-mauludin/final-project/config"
+	_ "github.com/kriti-mauludin/final-project/docs"
+	"github.com/kriti-mauludin/final-project/entity"
+	"github.com/kriti-mauludin/final-project/internal/http/auth"
+	"github.com/kriti-mauludin/final-project/internal/http/handler"
+	"github.com/kriti-mauludin/final-project/internal/parser"
+	"github.com/kriti-mauludin/final-project/internal/presenter/json"
+	"github.com/kriti-mauludin/final-project/internal/repository/mysql"
+	"github.com/kriti-mauludin/final-project/internal/usecase"
+	role_usecase "github.com/kriti-mauludin/final-project/internal/usecase/role"
+	todo_list_usecase "github.com/kriti-mauludin/final-project/internal/usecase/todo_list"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
@@ -92,16 +93,19 @@ func main() {
 	// REPOSITORY : Write repository code here (database, cache, etc.)
 	userRepo := mysql.NewUserRepository(mysqlDB)
 	todoListRepo := mysql.NewTodoListRepository(mysqlDB)
+	roleRepo := mysql.NewRoleRepository(mysqlDB)
 
 	// USECASE : Write bussines logic code here (validation, business logic, etc.)
 	// _ = usecase.NewLogUsecase(queue)  // LogUsecase is a sample usecase for sending log to queue (Mongodb, ElasticSearch, etc.)
-	userUsecase := usecase.NewUserUsecase(userRepo, jwtAuth)
-	crudTodoListUsecase := todo_list_usecase.NewCrudTodoListUsecase(todoListRepo, queue)
+	userUsecase := usecase.NewUserUsecase(userRepo, jwtAuth, queue)
+	crudTodoListUsecase := todo_list_usecase.NewCrudTodoListUsecase(todoListRepo)
+	crudRoleUsecase := role_usecase.NewCrudRoleUsecase(roleRepo, queue)
 
 	api := app.Group("/api/v1")
 
 	handler.NewAuthHandler(parser, presenterJson, userUsecase).Register(api)
 	handler.NewTodoListHandler(parser, presenterJson, crudTodoListUsecase).Register(api)
+	handler.NewRoleHandler(parser, presenterJson, crudRoleUsecase).Register(api)
 
 	app.Get("/health-check", healthCheck)
 	app.Get("/metrics", monitor.New())

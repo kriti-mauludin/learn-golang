@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/entity"
+	"github.com/kriti-mauludin/final-project/entity"
 	"golang.org/x/crypto/bcrypt"
 )
 

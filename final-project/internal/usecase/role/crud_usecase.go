@@ -51,7 +51,7 @@ func (t *CrudRoleUsecase) GetByUserID(ctx context.Context, userID int64) (res []
 	for _, v := range result {
 		res = append(res, &entity.RoleResponse{
 			ID:          v.ID,
-			Role:        v.Role,
+			Name:        v.Name,
 			Description: v.Description,
 			DoingAt:     helper.ConvertToJakartaDate(v.DoingAt),
 			CreatedAt:   helper.ConvertToJakartaTime(v.CreatedAt),
@@ -80,7 +80,7 @@ func (t *CrudRoleUsecase) GetByID(ctx context.Context, roleID int64) (*entity.Ro
 
 	return &entity.RoleResponse{
 		ID:          data.ID,
-		Role:        data.Role,
+		Name:        data.Name,
 		Description: data.Description,
 		DoingAt:     helper.ConvertToJakartaDate(data.DoingAt),
 		CreatedAt:   helper.ConvertToJakartaTime(data.CreatedAt),
@@ -103,7 +103,7 @@ func (t *CrudRoleUsecase) Create(ctx context.Context, roleReq entity.RoleReq) (*
 
 	rolePayload := &mentity.Role{
 		UserID:      roleReq.UserID,
-		Role:        roleReq.Role,
+		Name:        roleReq.Name,
 		Description: roleReq.Description,
 		DoingAt:     doingAt,
 		CreatedAt:   time.Now(),
@@ -116,24 +116,9 @@ func (t *CrudRoleUsecase) Create(ctx context.Context, roleReq entity.RoleReq) (*
 		return nil, err
 	}
 
-	sendEmailReq := entity.SendEmailReq{
-		UserID:    roleReq.UserID,
-		CreatedAt: rolePayload.CreatedAt,
-	}
-
-	sendEmailReqJson, _ := helper.Serialize(sendEmailReq)
-	err = t.queue.Publish(queue.ProcessSendEmail, sendEmailReqJson, 1)
-	if err != nil {
-		helper.LogError("queue.PublishMessage", funcName, err, generalEntity.CaptureFields{
-			"topic":   queue.ProcessSendEmail,
-			"payload": helper.ToString(sendEmailReq),
-		}, "")
-		return nil, err
-	}
-
 	return &entity.RoleResponse{
 		ID:          rolePayload.ID,
-		Role:        rolePayload.Role,
+		Name:        rolePayload.Name,
 		Description: rolePayload.Description,
 		DoingAt:     helper.ConvertToJakartaDate(rolePayload.DoingAt),
 		CreatedAt:   helper.ConvertToJakartaTime(rolePayload.CreatedAt),
@@ -165,7 +150,7 @@ func (t *CrudRoleUsecase) UpdateByID(ctx context.Context, roleReq entity.RoleReq
 		// Process Update
 		doingAt, _ := helper.ParseDate(roleReq.DoingAt)
 		if err := t.roleRepo.Update(ctx, trx, lockedData, &mentity.Role{
-			Role:        roleReq.Role,
+			Name:        roleReq.Name,
 			Description: roleReq.Description,
 			DoingAt:     doingAt,
 			UpdatedAt:   time.Now(),

@@ -4,12 +4,13 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/entity"
-	apperr "github.com/kriti-mauludin/try-consumer-rabbitmq/error"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/helper"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/http/auth"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/repository/mysql"
-	mentity "github.com/kriti-mauludin/try-consumer-rabbitmq/internal/repository/mysql/entity"
+	"github.com/kriti-mauludin/final-project/entity"
+	apperr "github.com/kriti-mauludin/final-project/error"
+	"github.com/kriti-mauludin/final-project/internal/helper"
+	"github.com/kriti-mauludin/final-project/internal/http/auth"
+	"github.com/kriti-mauludin/final-project/internal/queue"
+	"github.com/kriti-mauludin/final-project/internal/repository/mysql"
+	mentity "github.com/kriti-mauludin/final-project/internal/repository/mysql/entity"
 	errwrap "github.com/pkg/errors"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -17,13 +18,15 @@ import (
 type User struct {
 	userRepo mysql.UserRepository
 	jwtAuth  auth.JWTAuth
+	queue    queue.Queue
 }
 
 func NewUserUsecase(
 	userRepo mysql.UserRepository,
 	jwtAuth auth.JWTAuth,
+	queue queue.Queue,
 ) *User {
-	return &User{userRepo, jwtAuth}
+	return &User{userRepo, jwtAuth, queue}
 }
 
 type UserUsecase interface {
@@ -97,6 +100,24 @@ func (w *User) CreateAsGuest(ctx context.Context, createUserReq *entity.CreateUs
 	if err != nil {
 		helper.LogError("userRepo.Create", funcName, err, captureFieldError, "")
 
+		return nil, err
+	}
+
+	sendEmailReq := entity.SendEmailReq{
+		Name:      user.Name,
+		Email:     user.Email,
+		Role:      entity.GetRoleName(entity.Guest),
+		TypeEmail: "success-login",
+		Datetime:  helper.DatetimeNowJakartaString(),
+	}
+
+	sendEmailReqJson, _ := helper.Serialize(sendEmailReq)
+	err = w.queue.Publish(queue.ProcessSendEmail, sendEmailReqJson, 1)
+	if err != nil {
+		helper.LogError("queue.PublishMessage", funcName, err, entity.CaptureFields{
+			"topic":   queue.ProcessSendEmail,
+			"payload": helper.ToString(sendEmailReq),
+		}, "")
 		return nil, err
 	}
 

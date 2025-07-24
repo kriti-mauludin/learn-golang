@@ -6,7 +6,7 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/helper"
+	"github.com/kriti-mauludin/final-project/internal/helper"
 
 	"github.com/DATA-DOG/go-sqlmock"
 	"gorm.io/gorm/schema"

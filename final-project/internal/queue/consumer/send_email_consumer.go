@@ -3,9 +3,10 @@ package consumer
 import (
 	"context"
 	"fmt"
+	"log"
 
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/entity"
-	"github.com/kriti-mauludin/try-consumer-rabbitmq/internal/helper"
+	"github.com/kriti-mauludin/final-project/entity"
+	"github.com/kriti-mauludin/final-project/internal/mailer"
 )
 
 type SendEmailQueue struct {
@@ -26,8 +27,15 @@ func (l *SendEmailQueue) ProcessSendNotif(payload map[string]interface{}) error 
 	var params entity.SendEmailReq
 	params.LoadFromMap(payload)
 
-	helper.Dump("Processing Notif Success add new todolist ...")
-	fmt.Println(params)
+	mailObj, err := entity.FillMailObjLogin(params)
+	if err != nil {
+		log.Println("Err FillMailObj:", err)
+		return err
+	}
+	err = mailer.NewHandler().Send(mailObj)
+	if err != nil {
+		log.Println("Err send mail:", err)
+	}
 
 	fmt.Println("SEND NOTIF SUCCESS!")
 
