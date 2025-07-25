@@ -32,6 +32,7 @@ func NewUserUsecase(
 type UserUsecase interface {
 	VerifyByEmailAndPassword(ctx context.Context, req *entity.LoginReq) (loginRes *entity.LoginResponse, err error)
 	CreateAsGuest(ctx context.Context, createUserReq *entity.CreateUserReq) (*entity.CreateUserResponse, error)
+	DetailUser(ctx context.Context, userID int64) (*entity.DetailUserResponse, error)
 }
 
 func (w *User) VerifyByEmailAndPassword(ctx context.Context, req *entity.LoginReq) (loginRes *entity.LoginResponse, err error) {
@@ -94,6 +95,7 @@ func (w *User) CreateAsGuest(ctx context.Context, createUserReq *entity.CreateUs
 		Role:     int8(entity.Guest),
 		Phone:    createUserReq.Phone,
 		Password: string(hashedPassword),
+		Job:      createUserReq.JobId,
 	}
 
 	err = w.userRepo.Create(ctx, nil, user)
@@ -135,5 +137,30 @@ func (w *User) CreateAsGuest(ctx context.Context, createUserReq *entity.CreateUs
 		Phone:      user.Phone,
 		RoleAccess: entity.GetRoleName(entity.UserRole(user.Role)),
 		Token:      token,
+	}, nil
+}
+
+func (w *User) DetailUser(ctx context.Context, userID int64) (*entity.DetailUserResponse, error) {
+	funcName := "UserUsecase.DetailUser"
+	captureFieldError := map[string]string{"user_id": fmt.Sprint(userID)}
+
+	user, err := w.userRepo.GetByID(ctx, userID)
+	if err != nil {
+		helper.Log(entity.LogError, "userRepo.GetByID", funcName, err, captureFieldError, "")
+
+		if err == apperr.ErrUserNotFound() {
+			return nil, apperr.ErrUserNotFound()
+		}
+
+		return nil, err
+	}
+
+	return &entity.DetailUserResponse{
+		UserID:     user.ID,
+		Name:       user.Name,
+		Email:      user.Email,
+		RoleAccess: user.Role,
+		Job:        user.Job,
+		Phone:      user.Phone,
 	}, nil
 }

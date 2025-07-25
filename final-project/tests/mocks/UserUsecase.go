@@ -60,6 +60,26 @@ func (_m *UserUsecase) VerifyByEmailAndPassword(ctx context.Context, req *entity
 	return r0, r1
 }
 
+// DetailUser provides a mock function with given fields: ctx, userID
+func (_m *UserUsecase) DetailUser(ctx context.Context, userID int64) (*entity.DetailUserResponse, error) {
+	ret := _m.Called(ctx, userID)
+	var r0 *entity.DetailUserResponse
+	if rf, ok := ret.Get(0).(func(context.Context, int64) *entity.DetailUserResponse); ok {
+		r0 = rf(ctx, userID)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*entity.DetailUserResponse)
+		}
+	}
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, int64) error); ok {
+		r1 = rf(ctx, userID)
+	} else {
+		r1 = ret.Error(1)
+	}
+	return r0, r1
+}
+
 type mockConstructorTestingTNewUserUsecase interface {
 	mock.TestingT
 	Cleanup(func())

@@ -39,6 +39,7 @@ type CreateUserReq struct {
 	ReenterPassword string `json:"reenter_password" validate:"required"`
 	Phone           string `json:"phone" validate:"required" name:"Nomor Telepon"`
 	RoleAccess      int8   `json:"role_access" validate:"required" name:"Hak Akses"`
+	JobId           string `json:"job_id" validate:"required" name:"Pekerjaan"`
 }
 type CreateUserResponse struct {
 	UserID     int64  `json:"user_id"`
@@ -47,6 +48,15 @@ type CreateUserResponse struct {
 	RoleAccess string `json:"role_access"`
 	Phone      string `json:"phone"`
 	Token      string `json:"access_token"`
+}
+
+type DetailUserResponse struct {
+	UserID     int64  `json:"user_id"`
+	Name       string `json:"name"`
+	Email      string `json:"email"`
+	RoleAccess int8   `json:"role_access"`
+	Job        string `json:"job"`
+	Phone      string `json:"phone"`
 }
 
 type Claims struct {

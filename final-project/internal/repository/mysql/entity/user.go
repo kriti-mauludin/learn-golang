@@ -7,6 +7,7 @@ type User struct {
 	Password string
 	Name     string
 	Role     int8
+	Job      string `gorm:"column:job_name"`
 }
 
 func (User) TableName() string {

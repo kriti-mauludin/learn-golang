@@ -19,6 +19,7 @@ type UserRepository interface {
 	LockByID(ctx context.Context, dbTrx TrxObj, ID int64) (*entity.User, error)
 	GetByEmail(ctx context.Context, email string) (*entity.User, error)
 	GetByEmailAndRole(ctx context.Context, email string, role entity.RoleType) (*entity.User, error)
+	GetByID(ctx context.Context, ID int64) (*entity.User, error)
 }
 
 type User struct {
@@ -76,6 +77,21 @@ func (u *User) GetByEmailAndRole(ctx context.Context, email string, role entity.
 
 	var user *entity.User
 	err := u.db.Where("email = ? AND role = ?", email, role).Take(&user).Error
+	if errwrap.Is(err, gorm.ErrRecordNotFound) {
+		return nil, apperr.ErrUserNotFound()
+	}
+
+	return user, err
+}
+
+func (u *User) GetByID(ctx context.Context, ID int64) (*entity.User, error) {
+	funcName := "UserRepository.GetByID"
+	if err := helper.CheckDeadline(ctx); err != nil {
+		return nil, errwrap.Wrap(err, funcName)
+	}
+
+	var user *entity.User
+	err := u.db.Select("users.*, job.name as job_name").Where("users.id = ?", ID).Joins("JOIN job ON job.id = users.job_id").Take(&user).Error
 	if errwrap.Is(err, gorm.ErrRecordNotFound) {
 		return nil, apperr.ErrUserNotFound()
 	}

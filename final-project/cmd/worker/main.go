@@ -68,12 +68,6 @@ func main() {
 	case queue.ProcessSendEmail:
 		log.Printf("[Worker] Listening to %v", queue.ProcessSendEmail)
 		go app.queue.HandleConsumedDeliveries(queue.ProcessSendEmail, sendEmailConsumer.ProcessSendNotif)
-	// case queue.ProcessSyncLog:
-	// 	log.Printf("[Worker] Listening to %v", queue.ProcessSyncLog)
-	// 	go app.queue.HandleConsumedDeliveries(queue.ProcessSyncLog, logConsumer.ProcessSyncLog)
-	// case queue.ProcessExample:
-	// 	log.Printf("[Worker] Listening to %v", queue.ProcessExample)
-	// 	go app.queue.HandleConsumedDeliveries(queue.ProcessExample, exampleConsumer.Process)
 	default:
 		log.Fatalf("[Worker] topic not found : %v", os.Args[1])
 	}

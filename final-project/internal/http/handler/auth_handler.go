@@ -32,6 +32,8 @@ func (w *AuthHandler) Register(app fiber.Router) {
 	app.Post("/auth/login", w.Login)
 	app.Get("/auth/check-token", middleware.VerifyJWTToken, w.CheckToken)
 	app.Get("/auth/refresh-token", middleware.VerifyJWTToken, w.RefreshToken)
+	// detail user
+	app.Get("/auth/detail-user/:id", middleware.VerifyJWTToken, w.DetailUser)
 }
 
 // @Summary			Create User as Guest
@@ -110,4 +112,31 @@ func (w *AuthHandler) RefreshToken(c *fiber.Ctx) error {
 	}
 
 	return w.presenter.BuildSuccess(c, newToken, "Success", http.StatusOK)
+}
+
+// DetailUser godoc
+// @Summary			Detail User
+// @Description		Get detail user by user_id
+// @Tags			Auth
+// @Accept			json
+// @Produce			json
+// @Security 		Bearer
+// @Param			user_id path int64 true "User ID"
+// @Success			200 {object} entity.GeneralResponse{data=entity.DetailUserResponse
+// @Failure			401 {object} entity.CustomErrorResponse "Invalid Access Token"
+// @Failure			422 {object} entity.CustomErrorResponse "Invalid Payload Request Body"
+// @Failure			500 {object} entity.CustomErrorResponse "Internal server Error"
+// @Router			/api/v1/auth/detail-user/{user_id} [get]
+func (w *AuthHandler) DetailUser(c *fiber.Ctx) error {
+	userID, err := w.parser.ParserIntIDFromPathParams(c)
+	if err != nil {
+		return w.presenter.BuildError(c, err)
+	}
+
+	detailUser, err := w.userUsecase.DetailUser(c.Context(), userID)
+	if err != nil {
+		return w.presenter.BuildError(c, err)
+	}
+
+	return w.presenter.BuildSuccess(c, detailUser, "Success", http.StatusOK)
 }
